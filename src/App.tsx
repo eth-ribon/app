@@ -5,6 +5,7 @@ import RoutesComponent from "./config/routes";
 import GlobalStyle from "./styles/globalStyle";
 import theme from "./styles/theme";
 
+
 function App() {
   const queryClient = new QueryClient();
 
