@@ -13,5 +13,4 @@ const Template: ComponentStory<typeof Header> = function (args: Props) {
 export const Default = Template.bind({});
 
 Default.args = {
-  sideLogo: "https://i.imgur.com/kJA77FC.png",
 };

@@ -43,7 +43,6 @@ function LayoutHeader(): JSX.Element {
         <div>teste</div>
       </ModalBlank>
       <Header
-        sideLogo={""}
         rightComponent={<S.Settings onClick={() => openMenu()} src={cogIcon} />}
       />
     </S.Container>
