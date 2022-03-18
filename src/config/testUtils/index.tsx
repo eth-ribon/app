@@ -83,24 +83,24 @@ export function renderComponent(
     component: render(
       <ThemeProvider theme={theme}>
         <QueryClientProvider client={queryClient}>
-            <Router history={historyObject}>
-              {renderProvider(
-                WalletProvider,
-                WalletContext,
-                walletProviderValue,
-                renderProvider(
-                  CurrentUserProvider,
-                  CurrentUserContext,
-                  currentUserProviderValue,
-                  component,
-                ),
-              )}
-            </Router>
+          <Router history={historyObject as any}>
+            {renderProvider(
+              WalletProvider,
+              WalletContext,
+              walletProviderValue,
+              renderProvider(
+                CurrentUserProvider,
+                CurrentUserContext,
+                currentUserProviderValue,
+                component,
+              ),
+            )}
+          </Router>
         </QueryClientProvider>
       </ThemeProvider>,
     ),
     history,
-  };
+  } as RenderWithContextResult;
 }
 
 export function expectTextToBeInTheDocument(text: string) {
