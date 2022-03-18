@@ -1,4 +1,3 @@
-import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 import useBreakpoint from "hooks/useBreakpoint";
 import CausesIconOn from "./assets/causesIconOn.svg";
@@ -11,10 +10,6 @@ export type Props = {
   isImpactPage: boolean;
 };
 function Navigation(): JSX.Element {
-  const { t } = useTranslation("translation", {
-    keyPrefix: "donations.menu",
-  });
-
   const { isDesktop } = useBreakpoint();
 
   const location = useLocation();
@@ -29,22 +24,22 @@ function Navigation(): JSX.Element {
     <S.ContainerDesktop>
       <S.StyledLink to={{ pathname: "/", search }}>
         <S.Icon src={iconCausesPage} />
-        <S.Title enabled={isCausesPage}>{t("causesPageTitle")}</S.Title>
+        <S.Title enabled={isCausesPage}>page 1</S.Title>
       </S.StyledLink>
       <S.StyledLink to={{ pathname: "/impact", search }}>
         <S.Icon src={iconImpactPage} />
-        <S.Title enabled={isImpactPage}>{t("impactTitle")}</S.Title>
+        <S.Title enabled={isImpactPage}>page 2</S.Title>
       </S.StyledLink>
     </S.ContainerDesktop>
   ) : (
     <S.ContainerMobile>
       <S.StyledLink to={{ pathname: "/", search }}>
         <S.Icon src={iconCausesPage} />
-        <S.Title enabled={isCausesPage}>{t("causesPageTitle")}</S.Title>
+        <S.Title enabled={isCausesPage}>page 1</S.Title>
       </S.StyledLink>
       <S.StyledLink to={{ pathname: "/impact", search }}>
         <S.Icon src={iconImpactPage} />
-        <S.Title enabled={isImpactPage}>{t("impactTitle")}</S.Title>
+        <S.Title enabled={isImpactPage}>page 2</S.Title>
       </S.StyledLink>
     </S.ContainerMobile>
   );
