@@ -76,8 +76,7 @@ export function renderComponent(
   }: RenderComponentProps = {},
 ): RenderWithContextResult {
   const queryClient = new QueryClient();
-  const historyObject = history;
-  historyObject.location.state = locationState;
+  const historyObject = { ...history, location: {state: locationState}} ;
 
   return {
     component: render(

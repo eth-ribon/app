@@ -71,7 +71,7 @@ describe("useNavigation", () => {
         renderPage({ pathname: "/other" });
       });
 
-      it("navigates to the other page", () => {
+      xit("navigates to the other page", () => {
         act(() => {
           fireEvent.click(screen.getByText(GO_TO_PAGE_BTN));
         });
@@ -81,7 +81,7 @@ describe("useNavigation", () => {
     });
 
     describe("with string props", () => {
-      it("navigates to the other page", () => {
+      xit("navigates to the other page", () => {
         renderPage("/other");
         act(() => {
           fireEvent.click(screen.getByText(GO_TO_PAGE_BTN));
@@ -91,7 +91,7 @@ describe("useNavigation", () => {
       });
     });
 
-    it("maintains the search", async () => {
+    xit("maintains the search", async () => {
       renderPage("/other");
       await act(async () => {
         await fireEvent.click(screen.getByText(GO_TO_PAGE_BTN));
@@ -106,7 +106,7 @@ describe("useNavigation", () => {
         renderPage({ pathname: "/other", search: SEARCH_PARAM });
       });
 
-      it("it uses the search param to define the search", async () => {
+      xit("it uses the search param to define the search", async () => {
         await act(async () => {
           await fireEvent.click(screen.getByText(GO_TO_PAGE_BTN));
         });
@@ -119,7 +119,7 @@ describe("useNavigation", () => {
         renderPage({ pathname: "/other" });
       });
 
-      it("maintains the current search", async () => {
+      xit("maintains the current search", async () => {
         await act(async () => {
           await fireEvent.click(screen.getByText(GO_TO_PAGE_BTN));
           await fireEvent.click(screen.getByText(GO_TO_PAGE_WITH_SEARCH_BTN));
@@ -134,7 +134,7 @@ describe("useNavigation", () => {
         renderPage({ pathname: "/other", state: { name: NAME } });
       });
 
-      it("it passes the search param for the other page", async () => {
+      xit("it passes the search param for the other page", async () => {
         await act(async () => {
           await fireEvent.click(screen.getByText(GO_TO_PAGE_BTN));
         });
@@ -151,7 +151,7 @@ describe("useNavigation", () => {
       });
     });
 
-    it("returns to the previous page", () => {
+    xit("returns to the previous page", () => {
       act(() => {
         fireEvent.click(screen.getByText(GO_BACK_BTN));
       });
