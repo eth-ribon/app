@@ -31,6 +31,10 @@ function RegisterStudentPage(): JSX.Element {
         onFormSubmit={handleFormSubmit}
         primaryButtonText="Registrar"
       />
+      <S.Text>
+        *Certifique-se de cadastrar apenas endereços públicos de carteiras
+        criadas na rede da Celo.
+      </S.Text>
     </S.Container>
   );
 }

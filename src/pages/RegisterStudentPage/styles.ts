@@ -9,3 +9,9 @@ export const Title = styled.h1`
 export const Container = styled.div`
   ${() => css``}
 `;
+
+export const Text = styled.p`
+  ${({ theme }) => css`
+    color: ${theme.colors.darkGray};
+  `}
+`;

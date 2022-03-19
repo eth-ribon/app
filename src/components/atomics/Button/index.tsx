@@ -23,7 +23,7 @@ export type Props = {
 export default function Button({
   text,
   textColor = theme.colors.ribonWhite,
-  backgroundColor = theme.colors.ribonBlue,
+  backgroundColor = theme.colors.ribonPurple,
   borderColor = "",
   ribons = false,
   ribonsColor = theme.colors.ribonBlue,

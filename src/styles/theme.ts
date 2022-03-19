@@ -22,6 +22,7 @@ const theme: ThemeType = {
   },
   colors: {
     ribonBlue: "#35B1D8",
+    ribonPurple: "#9A66EF",
     ribonBlack: "#185669",
     darkGray: "#82AABE",
     lightGray: "#D9E5EB",

@@ -24,11 +24,11 @@ function Navigation(): JSX.Element {
     <S.ContainerDesktop>
       <S.StyledLink to={{ pathname: "/", search }}>
         <S.Icon src={iconHomePage} />
-        <S.Title enabled={isHomePage}>page 1</S.Title>
+        <S.Title enabled={isHomePage}>Turmas</S.Title>
       </S.StyledLink>
       <S.StyledLink to={{ pathname: "/students", search }}>
         <S.Icon src={iconStudentsPage} />
-        <S.Title enabled={isStudentsPage}>page 2</S.Title>
+        <S.Title enabled={isStudentsPage}>Alunos</S.Title>
       </S.StyledLink>
     </S.ContainerDesktop>
   ) : (

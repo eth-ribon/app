@@ -67,7 +67,7 @@ function GenericForm({
         ))}
 
         {loading ? (
-          <div>loading...</div>
+          <div>...</div>
         ) : (
           <Button
             text={primaryButtonText}
