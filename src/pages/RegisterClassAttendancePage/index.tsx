@@ -9,7 +9,7 @@ function RegisterClassAttendancePage(): JSX.Element {
   const [presentStudents, setPresentStudents] = useState(students);
 
   useEffect(() => {
-    console.log(presentStudents);
+    console.log(presentStudents.map((student) => student.name));
   }, [presentStudents]);
 
   function handleCheckboxChange(e: any, student: any) {
