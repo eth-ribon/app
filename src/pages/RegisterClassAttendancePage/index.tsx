@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import StudentIcon from "assets/icons/student-icon.svg";
 import * as S from "./styles";
 import CardIconText from "../../components/moleculars/cards/CardIconText";
+import Button from "../../components/atomics/Button";
 
 function RegisterClassAttendancePage(): JSX.Element {
   const [students] = useState([{ name: "Theo" }, { name: "Anna" }]);
@@ -41,6 +42,13 @@ function RegisterClassAttendancePage(): JSX.Element {
           }
         />
       ))}
+
+      <Button
+        text="Registrar"
+        onClick={() => {
+          console.log(presentStudents);
+        }}
+      />
     </S.Container>
   );
 }
