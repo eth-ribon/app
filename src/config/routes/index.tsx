@@ -5,6 +5,7 @@ import WalletProvider from "contexts/walletContext";
 import HomePage from "pages/HomePage";
 import MainLayout from "layouts/MainLayout";
 import StudentsPage from "pages/StudentsPage";
+import RegisterStudentPage from "../../pages/RegisterStudentPage";
 
 function RoutesComponent(): JSX.Element {
   return (
@@ -27,6 +28,18 @@ function RoutesComponent(): JSX.Element {
             <CurrentUserProvider>
               <MainLayout>
                 <StudentsPage />
+              </MainLayout>
+            </CurrentUserProvider>
+          </WalletProvider>
+        </Suspense>
+      </Route>
+
+      <Route path="/students/register" exact>
+        <Suspense fallback={<div />}>
+          <WalletProvider>
+            <CurrentUserProvider>
+              <MainLayout>
+                <RegisterStudentPage />
               </MainLayout>
             </CurrentUserProvider>
           </WalletProvider>
