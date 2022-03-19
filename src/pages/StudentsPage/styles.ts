@@ -19,10 +19,16 @@ export const GridContainer = styled.div`
 `;
 
 export const ButtonContainer = styled.div`
-  ${() => css`
+  ${({ theme }) => css`
     position: absolute;
     bottom: 110px;
     right: 14px;
     width: 50%;
+
+    @media (min-width: ${theme.breakpoints.pad}) {
+      position: static;
+      margin-top: 28px;
+      width: 100%;
+    }
   `}
 `;
