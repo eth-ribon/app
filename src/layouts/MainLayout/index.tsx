@@ -4,13 +4,14 @@ import * as S from "./styles";
 
 export type Props = {
   children: JSX.Element;
+  hasBackButton?: boolean;
 };
-function MainLayout({ children }: Props): JSX.Element {
+function MainLayout({ children, hasBackButton = false }: Props): JSX.Element {
   return (
     <>
       <Navigation />
       <S.Container>
-        <LayoutHeader />
+        <LayoutHeader hasBackButton={hasBackButton} />
         {children}
       </S.Container>
     </>

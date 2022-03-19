@@ -7,6 +7,9 @@ export const Container = styled.div`
     align-items: center;
     height: 58px;
     width: 100%;
+    box-shadow: 0px 4px 12px rgba(24, 86, 105, 0.1);
+    border-radius: 16px;
+    padding: 0 16px;
   `}
 `;
 

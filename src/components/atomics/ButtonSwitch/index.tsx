@@ -28,14 +28,14 @@ function ButtonSwitch({
   return (
     <S.Container>
       <S.BoxIcon>
-        <S.Text color={checked ? darkGray : ribonBlue}>{leftText}</S.Text>
+        <S.Text color={darkGray}>{leftText}</S.Text>
       </S.BoxIcon>
       <S.ContainerSwitch>
         <Switch
           id="switch"
           onChange={handleChange}
           checked={checked}
-          offColor={ribonBlue}
+          offColor={darkGray}
           onColor={ribonBlue}
           onHandleColor={ribonWhite}
           offHandleColor={ribonWhite}

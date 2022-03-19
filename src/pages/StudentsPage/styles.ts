@@ -26,11 +26,3 @@ export const ButtonContainer = styled.div`
     width: 50%;
   `}
 `;
-
-export const BodyContainer = styled.div`
-  ${() => css``}
-`;
-
-export const CardClass = styled.div`
-  ${() => css``}
-`;
