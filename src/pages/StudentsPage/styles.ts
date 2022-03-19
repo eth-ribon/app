@@ -17,3 +17,12 @@ export const GridContainer = styled.div`
     column-gap: 8px;
   `}
 `;
+
+export const ButtonContainer = styled.div`
+  ${() => css`
+    position: absolute;
+    bottom: 110px;
+    right: 14px;
+    width: 50%;
+  `}
+`;
