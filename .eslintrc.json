@@ -22,6 +22,8 @@
     },
     "plugins": ["react", "@typescript-eslint", "react-hooks"],
     "rules": {
+        "react/no-unused-prop-types": "off",
+        "react/no-array-index-key": "off",
         "react/require-default-props": "off",
         "react/prop-types": "off",
         "react/jsx-filename-extension": [

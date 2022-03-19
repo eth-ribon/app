@@ -6,7 +6,6 @@ export const Container = styled.div`
     align-items: center;
     height: 56px;
     justify-content: space-between;
-    margin: 0 16px;
 
     @media (min-width: ${theme.breakpoints.pad}) {
       height: 128px;
