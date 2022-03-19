@@ -4,9 +4,23 @@ export const Container = styled.div`
   ${() => css``}
 `;
 
+export const ButtonContainer = styled.div`
+  ${() => css`
+    margin-top: 14px;
+  `}
+`;
+
 export const Title = styled.h1`
   ${({ theme }) => css`
     color: ${theme.colors.ribonBlue};
+    margin-bottom: 0;
+  `}
+`;
+
+export const Text = styled.h3`
+  ${({ theme }) => css`
+    color: ${theme.colors.darkGray};
+    margin-bottom: 26px;
   `}
 `;
 

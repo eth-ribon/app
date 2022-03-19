@@ -9,6 +9,7 @@ import CheckIcon from "../../assets/icons/check-icon.svg";
 import ModalIcon from "../../components/moleculars/modals/ModalIcon";
 import classAttendanceApi from "../../services/api/classAttendanceApi";
 import useNavigation from "../../hooks/useNavigation";
+import { todayDateFormatted } from "../../lib/currentDate";
 
 type LocationState = {
   classId: number;
@@ -71,6 +72,7 @@ function RegisterClassAttendancePage(): JSX.Element {
         body="Aula registrada"
       />
       <S.Title>Registrar aula</S.Title>
+      <S.Text>{todayDateFormatted()}</S.Text>
 
       <S.Subtitle>Alunos presentes</S.Subtitle>
       {students.map((student) => (
@@ -89,7 +91,9 @@ function RegisterClassAttendancePage(): JSX.Element {
         />
       ))}
 
-      <Button text="Registrar" onClick={sendAttendanceRegistration} />
+      <S.ButtonContainer>
+        <Button text="Registrar" onClick={sendAttendanceRegistration} />
+      </S.ButtonContainer>
     </S.Container>
   );
 }
