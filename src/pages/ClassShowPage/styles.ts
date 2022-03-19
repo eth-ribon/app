@@ -12,3 +12,9 @@ export const ButtonContainer = styled.div`
     width: 50%;
   `}
 `;
+
+export const Title = styled.h1`
+  ${({ theme }) => css`
+    color: ${theme.colors.ribonBlue};
+  `}
+`;

@@ -8,6 +8,7 @@ import classesApi from "../../services/api/classesApi";
 import CheckIcon from "../../assets/icons/check-icon.svg";
 import ModalIcon from "../../components/moleculars/modals/ModalIcon";
 import classAttendanceApi from "../../services/api/classAttendanceApi";
+import useNavigation from "../../hooks/useNavigation";
 
 type LocationState = {
   classId: number;
@@ -18,6 +19,7 @@ function RegisterClassAttendancePage(): JSX.Element {
   const [presentStudents, setPresentStudents] = useState(students);
   const { state } = useLocation<LocationState>();
   const [modalVisible, setModalVisible] = useState(false);
+  const { navigateBack } = useNavigation();
 
   useEffect(() => {
     async function fetchClass() {
@@ -55,6 +57,7 @@ function RegisterClassAttendancePage(): JSX.Element {
 
   const closeModal = () => {
     setModalVisible(false);
+    navigateBack();
   };
 
   return (
