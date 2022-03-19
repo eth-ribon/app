@@ -38,7 +38,7 @@ function RoutesComponent(): JSX.Element {
         <Suspense fallback={<div />}>
           <WalletProvider>
             <CurrentUserProvider>
-              <MainLayout>
+              <MainLayout hasBackButton>
                 <RegisterStudentPage />
               </MainLayout>
             </CurrentUserProvider>
