@@ -12,7 +12,13 @@ function HomePage(): JSX.Element {
       <S.Title>TURMAS</S.Title>
       <S.BodyContainer>
         <S.GridContainer>
-          <CardIconText text="capoeira" icon={GlobeIcon} />
+          <S.CardClass
+            onClick={() => {
+              navigateTo("/classes/show");
+            }}
+          >
+            <CardIconText text="capoeira" icon={GlobeIcon} />
+          </S.CardClass>
           <CardIconText text="capoeira" icon={GlobeIcon} />
         </S.GridContainer>
 

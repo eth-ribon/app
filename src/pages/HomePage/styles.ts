@@ -30,3 +30,7 @@ export const ButtonContainer = styled.div`
 export const BodyContainer = styled.div`
   ${() => css``}
 `;
+
+export const CardClass = styled.div`
+  ${() => css``}
+`;

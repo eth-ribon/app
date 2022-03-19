@@ -9,7 +9,7 @@ export const Container = styled.div`
     width: 100%;
     box-shadow: 0px 4px 12px rgba(24, 86, 105, 0.1);
     border-radius: 16px;
-    padding: 0 8px;
+    padding: 0 16px;
   `}
 `;
 
