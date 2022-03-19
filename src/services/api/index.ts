@@ -1,4 +1,6 @@
 import Axios, { AxiosRequestConfig } from "axios";
+import camelCaseKeys from "camelcase-keys";
+import snakeCaseKeys from "snakecase-keys";
 
 const API_URL = "https://test.ondigitalocean.app/";
 
@@ -13,6 +15,19 @@ const api = Axios.create({
   validateStatus: (status) => status >= 200 && status < 300,
 });
 
+api.interceptors.request.use((request) =>
+  request?.data
+    ? { ...request, data: snakeCaseKeys(request?.data, { deep: true }) }
+    : request,
+);
+
+api.interceptors.response.use(
+  (response) => ({
+    ...response,
+    data: camelCaseKeys(response.data, { deep: true }),
+  }),
+  (error) => Promise.reject(error),
+);
 
 export function apiGet(url: string, config?: AxiosRequestConfig) {
   if (config) return api.get(`${API_SCOPE}/${url}`, config);
