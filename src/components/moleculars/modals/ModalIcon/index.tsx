@@ -46,7 +46,7 @@ function ModalIcon({
   primaryButtonText = null,
   primaryButtonLeftIcon = undefined,
   primaryButtonTextColor = "white",
-  primaryButtonColor = theme.colors.ribonBlue,
+  primaryButtonColor = theme.colors.ribonPurple,
   primaryButtonBorderColor,
   secondaryButtonText = null,
   secondaryButtonLeftIcon = undefined,

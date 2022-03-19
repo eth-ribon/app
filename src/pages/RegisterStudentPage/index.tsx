@@ -1,13 +1,38 @@
+import { useState } from "react";
+import CheckIcon from "assets/icons/check-icon.svg";
 import * as S from "./styles";
 import GenericForm from "../../components/moleculars/forms/GenericForm";
+import studentsApi from "../../services/api/studentsApi";
+import ModalIcon from "../../components/moleculars/modals/ModalIcon";
 
 function RegisterStudentPage(): JSX.Element {
+  const [modalVisible, setModalVisible] = useState(false);
+
   const handleFormSubmit = async (values: any) => {
-    console.log(values);
+    try {
+      await studentsApi.postStudents(values.name, values.familyAddress);
+      setModalVisible(true);
+      console.log(values);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
   };
 
   return (
     <S.Container>
+      <ModalIcon
+        onClose={closeModal}
+        visible={modalVisible}
+        primaryButtonText="Ok"
+        primaryButtonCallback={closeModal}
+        icon={CheckIcon}
+        body="Aluna(o) cadastrada(o)"
+      />
+
       <S.Title>Registre um aluno</S.Title>
 
       <GenericForm
