@@ -4,12 +4,17 @@ import PlusIcon from "assets/icons/plus-icon.svg";
 import * as S from "./styles";
 import CardIconText from "../../components/moleculars/cards/CardIconText";
 import Button from "../../components/atomics/Button";
+import { useApi } from "../../hooks/useApi";
+import studentsApi from "../../services/api/studentsApi";
+import classesApi from "../../services/api/classesApi";
+import CheckIcon from "../../assets/icons/check-icon.svg";
+import ModalIcon from "../../components/moleculars/modals/ModalIcon";
 
 function RegisterClassPage(): JSX.Element {
-  const students = [
-    { id: 1, name: "Theo" },
-    { id: 2, name: "Anna" },
-  ];
+  const { data: students } = useApi<any[]>({
+    key: "students",
+    fetchMethod: studentsApi.getStudents,
+  });
 
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState<Record<any, any>[]>([]);
@@ -17,19 +22,46 @@ function RegisterClassPage(): JSX.Element {
     [],
   );
   const [className, setClassName] = useState("");
+  const [modalVisible, setModalVisible] = useState(false);
 
   const handleChange = (e: any) => {
     setSearchTerm(e.target.value);
   };
   useEffect(() => {
-    const results = students.filter((person) =>
+    const results = students?.filter((person) =>
       person.name.toLowerCase().includes(searchTerm),
     );
-    setSearchResults(results);
+    setSearchResults(results || []);
   }, [searchTerm]);
+
+  const createClass = async () => {
+    try {
+      await classesApi.postClasses(
+        className,
+        includedStudents.map((student) => student.id),
+      );
+      setModalVisible(true);
+      setClassName("");
+      setIncludedStudents([]);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
+  };
 
   return (
     <S.Container>
+      <ModalIcon
+        onClose={closeModal}
+        visible={modalVisible}
+        primaryButtonText="Ok"
+        primaryButtonCallback={closeModal}
+        icon={CheckIcon}
+        body="Turma registrada"
+      />
       <S.Title>Crie uma turma</S.Title>
 
       <S.Input
@@ -84,15 +116,7 @@ function RegisterClassPage(): JSX.Element {
       ))}
 
       <S.ButtonContainer>
-        <Button
-          text="Criar"
-          onClick={() => {
-            console.log(
-              includedStudents.map((student) => student.id),
-              className,
-            );
-          }}
-        />
+        <Button text="Criar" onClick={createClass} />
       </S.ButtonContainer>
     </S.Container>
   );
