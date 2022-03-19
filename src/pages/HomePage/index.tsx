@@ -3,23 +3,30 @@ import GlobeIcon from "assets/icons/globe-icon.svg";
 import * as S from "./styles";
 import Button from "../../components/atomics/Button";
 import useNavigation from "../../hooks/useNavigation";
+import { useApi } from "../../hooks/useApi";
+import classesApi from "../../services/api/classesApi";
 
 function HomePage(): JSX.Element {
   const { navigateTo } = useNavigation();
+  const { data: classes } = useApi<any[]>({
+    key: "classes",
+    fetchMethod: classesApi.getClasses,
+  });
 
   return (
     <S.Container>
       <S.Title>TURMAS</S.Title>
       <S.BodyContainer>
         <S.GridContainer>
-          <S.CardClass
-            onClick={() => {
-              navigateTo("/classes/show");
-            }}
-          >
-            <CardIconText text="capoeira" icon={GlobeIcon} />
-          </S.CardClass>
-          <CardIconText text="capoeira" icon={GlobeIcon} />
+          {classes?.map((klass) => (
+            <S.CardClass
+              onClick={() => {
+                navigateTo("/classes/show");
+              }}
+            >
+              <CardIconText text={klass.name} icon={GlobeIcon} />
+            </S.CardClass>
+          ))}
         </S.GridContainer>
 
         <S.ButtonContainer>

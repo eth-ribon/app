@@ -2,10 +2,10 @@ import Axios, { AxiosRequestConfig } from "axios";
 import camelCaseKeys from "camelcase-keys";
 import snakeCaseKeys from "snakecase-keys";
 
-const API_URL = "https://test.ondigitalocean.app/";
+const API_URL = "http://localhost:3001";
 
 export const baseURL = process.env.REACT_APP_RIBON_API || API_URL;
-export const API_SCOPE = "/api/v1";
+export const API_SCOPE = "";
 
 const api = Axios.create({
   baseURL,

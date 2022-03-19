@@ -15,6 +15,7 @@ export const GridContainer = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
     column-gap: 8px;
+    row-gap: 8px;
   `}
 `;
 
