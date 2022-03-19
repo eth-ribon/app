@@ -1,4 +1,4 @@
-import React, { FormEventHandler, useEffect } from "react";
+import React, { FormEventHandler, useEffect, useState } from "react";
 import theme from "styles/theme";
 import Button, { onClickType } from "components/atomics/Button";
 import { useForm } from "hooks/useForm";
@@ -13,7 +13,7 @@ export type FieldProps = {
 };
 
 export type Props = {
-  primaryButtonText?: string | null;
+  primaryButtonText: string;
   primaryButtonTextColor?: string;
   primaryButtonColor?: string;
   primaryButtonBorderColor?: string;
@@ -26,7 +26,7 @@ export type Props = {
 };
 
 function GenericForm({
-  primaryButtonText = null,
+  primaryButtonText,
   primaryButtonTextColor = "white",
   primaryButtonColor = theme.colors.ribonBlue,
   primaryButtonBorderColor,
@@ -39,13 +39,16 @@ function GenericForm({
 }: Props): JSX.Element {
   // eslint-disable-next-line no-use-before-define
   const [onChange, onSubmit, values] = useForm(handleOnSubmit, initialState);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (onValuesChange) onValuesChange(values);
   }, [values]);
 
-  function handleOnSubmit() {
-    onFormSubmit(values);
+  async function handleOnSubmit() {
+    setLoading(true);
+    await onFormSubmit(values);
+    setLoading(false);
   }
 
   return (
@@ -63,7 +66,9 @@ function GenericForm({
           />
         ))}
 
-        {primaryButtonText && (
+        {loading ? (
+          <div>loading...</div>
+        ) : (
           <Button
             text={primaryButtonText}
             textColor={primaryButtonTextColor}
