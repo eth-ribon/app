@@ -21,7 +21,7 @@ function HomePage(): JSX.Element {
           {classes?.map((klass) => (
             <S.CardClass
               onClick={() => {
-                navigateTo("/classes/show");
+                navigateTo({pathname: "/classes/show", state: {classId: klass.id}});
               }}
             >
               <CardIconText text={klass.name} icon={GlobeIcon} />
