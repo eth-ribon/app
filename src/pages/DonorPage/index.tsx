@@ -7,13 +7,19 @@ import { Accounts } from "@celo/contractkit/lib/generated/Accounts";
 import * as S from "./styles";
 import CardBlank from "../../components/moleculars/cards/CardBlank";
 import Button from "../../components/atomics/Button";
+import ModalIcon from "../../components/moleculars/modals/ModalIcon";
+import CheckIcon from "../../assets/icons/check-icon.svg";
 
 function DonorPage(): JSX.Element {
+  const contractAddress = "0xf58121351c85ca4DB4867C7F7Fe17b11C4B2c953";
+
   const [userAccounts, setUserAccounts] = useState<Accounts>();
   const [mainKit, setMainKit] = useState<ContractKit>();
   const [mainProvider, setMainProvider] = useState<WalletConnectProvider>();
-  const [donationAmount, setDonationAmount] = useState("0.1");
+  const [donationAmount, setDonationAmount] = useState("");
   const [contractBalance, setContractBalance] = useState("");
+  const [donationButtonDisabled, setDonationButtonDisabled] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
 
   const connect = async () => {
     const provider = new WalletConnectProvider({
@@ -53,9 +59,7 @@ function DonorPage(): JSX.Element {
     const stabletoken = await mainKit.contracts.getStableToken();
 
     try {
-      const response = await stabletoken.balanceOf(
-        "0xf58121351c85ca4DB4867C7F7Fe17b11C4B2c953",
-      );
+      const response = await stabletoken.balanceOf(contractAddress);
 
       console.log(response);
       setContractBalance(
@@ -78,9 +82,7 @@ function DonorPage(): JSX.Element {
     try {
       const stabletoken = await mainKit.contracts.getStableToken();
 
-      const a = await stabletoken
-        .approve("0xf58121351c85ca4DB4867C7F7Fe17b11C4B2c953", amount)
-        .send();
+      const a = await stabletoken.approve(contractAddress, amount).send();
 
       console.log(a);
     } catch (e) {
@@ -88,15 +90,16 @@ function DonorPage(): JSX.Element {
     }
   };
 
-  const contractIteration = async () => {
+  const donateThroughContract = async () => {
     if (!mainKit) return;
 
+    setDonationButtonDisabled(true);
     const amount = mainKit.web3.utils.toWei(donationAmount, "ether");
     await mainKit.setFeeCurrency(CeloContract.StableToken);
 
     const contract = new mainKit.connection.web3.eth.Contract(
       EducaAbi.abi as any,
-      "0xf58121351c85ca4DB4867C7F7Fe17b11C4B2c953",
+      contractAddress,
     );
 
     try {
@@ -105,13 +108,30 @@ function DonorPage(): JSX.Element {
         .send({ from: contract.defaultAccount });
 
       console.log(response);
+      getContractBalance();
+      setModalVisible(true);
+      setDonationAmount("");
     } catch (e) {
       console.log(e);
+    } finally {
+      setDonationButtonDisabled(false);
     }
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
   };
 
   return (
     <S.Container>
+      <ModalIcon
+        onClose={closeModal}
+        visible={modalVisible}
+        primaryButtonText="Ok"
+        primaryButtonCallback={closeModal}
+        icon={CheckIcon}
+        body="Contribuição enviada!"
+      />
       <S.Title>FUNDO</S.Title>
       <S.ConnectWalletContainer>
         <Button
@@ -141,7 +161,11 @@ function DonorPage(): JSX.Element {
               value={donationAmount}
               onChange={(e: any) => setDonationAmount(e.target.value)}
             />
-            <Button text="Contribuir" onClick={contractIteration} />
+            <Button
+              text="Contribuir"
+              onClick={donateThroughContract}
+              disabled={donationButtonDisabled}
+            />
           </S.InnerContainer>
         </CardBlank>
 
