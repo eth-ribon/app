@@ -11,7 +11,7 @@ import ModalIcon from "../../components/moleculars/modals/ModalIcon";
 import CheckIcon from "../../assets/icons/check-icon.svg";
 
 function DonorPage(): JSX.Element {
-  const contractAddress = "0xf58121351c85ca4DB4867C7F7Fe17b11C4B2c953";
+  const contractAddress = "0xa824DB66eb16B2a5dC94fDa40AEDD6f70D263544";
 
   const [userAccounts, setUserAccounts] = useState<Accounts>();
   const [mainKit, setMainKit] = useState<ContractKit>();

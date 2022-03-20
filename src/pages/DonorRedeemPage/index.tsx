@@ -11,7 +11,7 @@ import ModalIcon from "../../components/moleculars/modals/ModalIcon";
 import CheckIcon from "../../assets/icons/check-icon.svg";
 
 function DonorRedeemPage(): JSX.Element {
-  const contractAddress = "0xf58121351c85ca4DB4867C7F7Fe17b11C4B2c953";
+  const contractAddress = "0xa824DB66eb16B2a5dC94fDa40AEDD6f70D263544";
 
   const [userAccounts, setUserAccounts] = useState<Accounts>();
   const [mainKit, setMainKit] = useState<ContractKit>();
@@ -95,11 +95,11 @@ function DonorRedeemPage(): JSX.Element {
     }
   };
 
-  const donateThroughContract = async () => {
+  const burnTokens = async () => {
     if (!mainKit) return;
 
     setDonationButtonDisabled(true);
-    const amount = mainKit.web3.utils.toWei(donationAmount, "ether");
+
     await mainKit.setFeeCurrency(CeloContract.StableToken);
 
     const contract = new mainKit.connection.web3.eth.Contract(
@@ -109,7 +109,7 @@ function DonorRedeemPage(): JSX.Element {
 
     try {
       const response = await contract.methods
-        .addDonationPoolBalance(amount)
+        .claimAttendance()
         .send({ from: contract.defaultAccount });
 
       console.log(response);
@@ -162,7 +162,7 @@ function DonorRedeemPage(): JSX.Element {
             <S.BalanceText>Saldo de EDC: {contractBalance}</S.BalanceText>
             <Button
               text="Contribuir"
-              onClick={donateThroughContract}
+              onClick={burnTokens}
               disabled={donationButtonDisabled}
             />
           </S.InnerContainer>
