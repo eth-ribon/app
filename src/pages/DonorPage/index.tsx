@@ -13,6 +13,7 @@ function DonorPage(): JSX.Element {
   const [mainKit, setMainKit] = useState<ContractKit>();
   const [mainProvider, setMainProvider] = useState<WalletConnectProvider>();
   const [donationAmount, setDonationAmount] = useState("0.1");
+  const [contractBalance, setContractBalance] = useState("");
 
   const connect = async () => {
     const provider = new WalletConnectProvider({
@@ -44,7 +45,30 @@ function DonorPage(): JSX.Element {
 
   useEffect(() => {
     if (!mainKit?.defaultAccount) connect();
-  }, []);
+  }, [mainKit]);
+
+  const getContractBalance = async () => {
+    if (!mainKit) return;
+
+    const stabletoken = await mainKit.contracts.getStableToken();
+
+    try {
+      const response = await stabletoken.balanceOf(
+        "0xf58121351c85ca4DB4867C7F7Fe17b11C4B2c953",
+      );
+
+      console.log(response);
+      setContractBalance(
+        mainKit.connection.web3.utils.fromWei(response.toString()),
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    getContractBalance();
+  }, [mainKit]);
 
   const approveContract = async () => {
     if (!mainKit) return;
@@ -104,7 +128,7 @@ function DonorPage(): JSX.Element {
       <S.Text>Saldo do fundo</S.Text>
       <CardBlank>
         <S.FundText>
-          191.759,76 <S.FundTextCoin>cREAL</S.FundTextCoin>
+          {contractBalance} <S.FundTextCoin>cDollar</S.FundTextCoin>
         </S.FundText>
       </CardBlank>
       <S.BottomContainer>
@@ -113,7 +137,7 @@ function DonorPage(): JSX.Element {
           <S.InnerContainer>
             <S.Input
               type="text"
-              placeholder="valor em cREAL"
+              placeholder="valor em cDollar"
               value={donationAmount}
               onChange={(e: any) => setDonationAmount(e.target.value)}
             />
