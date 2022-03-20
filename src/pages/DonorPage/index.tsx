@@ -5,11 +5,14 @@ import { CeloContract, ContractKit, newKitFromWeb3 } from "@celo/contractkit";
 import EducaAbi from "utils/abis/Educa.json";
 import { Accounts } from "@celo/contractkit/lib/generated/Accounts";
 import * as S from "./styles";
+import CardBlank from "../../components/moleculars/cards/CardBlank";
+import Button from "../../components/atomics/Button";
 
 function DonorPage(): JSX.Element {
   const [userAccounts, setUserAccounts] = useState<Accounts>();
   const [mainKit, setMainKit] = useState<ContractKit>();
   const [mainProvider, setMainProvider] = useState<WalletConnectProvider>();
+  const [donationAmount, setDonationAmount] = useState("0.1");
 
   const connect = async () => {
     const provider = new WalletConnectProvider({
@@ -39,25 +42,14 @@ function DonorPage(): JSX.Element {
     console.log(mainKit?.web3.utils.toWei("0.001", "ether"));
   }, [mainKit, mainProvider]);
 
-  const sendcUSD = async () => {
-    if (!mainKit) return;
-
-    const amount = mainKit.web3.utils.toWei("0.001", "ether");
-    await mainKit.setFeeCurrency(CeloContract.StableToken);
-
-    const stabletoken = await mainKit.contracts.getStableToken();
-    const tx = await stabletoken
-      ?.transfer(mainKit.defaultAccount || "", amount)
-      .send();
-    const receipt = await tx.waitReceipt();
-
-    console.log(receipt);
-  };
+  useEffect(() => {
+    if (!mainKit?.defaultAccount) connect();
+  }, []);
 
   const approveContract = async () => {
     if (!mainKit) return;
 
-    const amount = mainKit.web3.utils.toWei("0.1", "ether");
+    const amount = mainKit.web3.utils.toWei("100.1", "ether");
 
     try {
       const stabletoken = await mainKit.contracts.getStableToken();
@@ -75,7 +67,7 @@ function DonorPage(): JSX.Element {
   const contractIteration = async () => {
     if (!mainKit) return;
 
-    const amount = mainKit.web3.utils.toWei("0.001", "ether");
+    const amount = mainKit.web3.utils.toWei(donationAmount, "ether");
     await mainKit.setFeeCurrency(CeloContract.StableToken);
 
     const contract = new mainKit.connection.web3.eth.Contract(
@@ -86,7 +78,7 @@ function DonorPage(): JSX.Element {
     try {
       const response = await contract.methods
         .addDonationPoolBalance(amount)
-        .call();
+        .send({ from: contract.defaultAccount });
 
       console.log(response);
     } catch (e) {
@@ -97,21 +89,42 @@ function DonorPage(): JSX.Element {
   return (
     <S.Container>
       <S.Title>FUNDO</S.Title>
+      <S.ConnectWalletContainer>
+        <Button
+          text={
+            mainKit?.defaultAccount
+              ? `${mainKit?.defaultAccount?.slice(0, 7)}...`
+              : "connect wallet"
+          }
+          onClick={connect}
+          outline
+        />
+      </S.ConnectWalletContainer>
       <S.Subtitle>Contribua para que crianças continuem aprendendo</S.Subtitle>
       <S.Text>Saldo do fundo</S.Text>
-      <button type="button" onClick={connect}>
-        Conectar
-      </button>
-      <button type="button" onClick={sendcUSD}>
-        Send cUSD
-      </button>
-      <button type="button" onClick={contractIteration}>
-        Interact
-      </button>
-      <button type="button" onClick={approveContract}>
-        Approve
-      </button>
-      <p>{mainKit?.defaultAccount}</p>
+      <CardBlank>
+        <S.FundText>
+          191.759,76 <S.FundTextCoin>cREAL</S.FundTextCoin>
+        </S.FundText>
+      </CardBlank>
+      <S.BottomContainer>
+        <S.Text>Contribua</S.Text>
+        <CardBlank>
+          <S.InnerContainer>
+            <S.Input
+              type="text"
+              placeholder="valor em cREAL"
+              value={donationAmount}
+              onChange={(e: any) => setDonationAmount(e.target.value)}
+            />
+            <Button text="Contribuir" onClick={contractIteration} />
+          </S.InnerContainer>
+        </CardBlank>
+
+        <button type="button" onClick={approveContract}>
+          Approve
+        </button>
+      </S.BottomContainer>
     </S.Container>
   );
 }
