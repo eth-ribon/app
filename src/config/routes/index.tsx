@@ -10,6 +10,8 @@ import RegisterClassPage from "../../pages/RegisterClassPage";
 import ClassShowPage from "../../pages/ClassShowPage";
 import RegisterClassAttendancePage from "../../pages/RegisterClassAttendancePage";
 import DonorPage from "../../pages/DonorPage";
+import DonorRedeemPage from "../../pages/DonorRedeemPage";
+import DonorLayout from "../../layouts/DonorLayout";
 
 function RoutesComponent(): JSX.Element {
   return (
@@ -90,9 +92,21 @@ function RoutesComponent(): JSX.Element {
         <Suspense fallback={<div />}>
           <WalletProvider>
             <CurrentUserProvider>
-              <MainLayout>
+              <DonorLayout>
                 <DonorPage />
-              </MainLayout>
+              </DonorLayout>
+            </CurrentUserProvider>
+          </WalletProvider>
+        </Suspense>
+      </Route>
+
+      <Route path="/donor/redeem" exact>
+        <Suspense fallback={<div />}>
+          <WalletProvider>
+            <CurrentUserProvider>
+              <DonorLayout>
+                <DonorRedeemPage />
+              </DonorLayout>
             </CurrentUserProvider>
           </WalletProvider>
         </Suspense>
