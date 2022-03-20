@@ -16,7 +16,6 @@ function DonorRedeemPage(): JSX.Element {
   const [userAccounts, setUserAccounts] = useState<Accounts>();
   const [mainKit, setMainKit] = useState<ContractKit>();
   const [mainProvider, setMainProvider] = useState<WalletConnectProvider>();
-  const [donationAmount, setDonationAmount] = useState("");
   const [contractBalance, setContractBalance] = useState("");
   const [donationButtonDisabled, setDonationButtonDisabled] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
@@ -99,7 +98,6 @@ function DonorRedeemPage(): JSX.Element {
       console.log(response);
       getContractBalance();
       setModalVisible(true);
-      setDonationAmount("");
     } catch (e) {
       console.log(e);
     } finally {
@@ -119,7 +117,7 @@ function DonorRedeemPage(): JSX.Element {
         primaryButtonText="Ok"
         primaryButtonCallback={closeModal}
         icon={CheckIcon}
-        body="Contribuição enviada!"
+        body="Resgate realizado!"
       />
       <S.Title>RESGATE</S.Title>
       <S.ConnectWalletContainer>
@@ -137,17 +135,11 @@ function DonorRedeemPage(): JSX.Element {
       <S.BottomContainer>
         <CardBlank>
           <S.InnerContainer>
-            <S.Input
-              type="text"
-              placeholder="valor em ETC"
-              value={donationAmount}
-              onChange={(e: any) => setDonationAmount(e.target.value)}
-            />
             <S.BalanceText>
               Saldo de EDC: {contractBalance.slice(0, 7)}
             </S.BalanceText>
             <Button
-              text="Contribuir"
+              text="Queimar 1 EDC e resgatar"
               onClick={burnTokens}
               disabled={donationButtonDisabled}
             />
