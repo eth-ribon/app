@@ -90,7 +90,7 @@ function RoutesComponent(): JSX.Element {
         <Suspense fallback={<div />}>
           <WalletProvider>
             <CurrentUserProvider>
-              <MainLayout hasBackButton>
+              <MainLayout>
                 <DonorPage />
               </MainLayout>
             </CurrentUserProvider>
