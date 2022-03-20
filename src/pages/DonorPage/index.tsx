@@ -46,6 +46,7 @@ function DonorPage(): JSX.Element {
   useEffect(() => {
     console.log(mainKit, mainProvider);
     console.log(userAccounts);
+    console.log(mainKit?.defaultAccount);
     console.log(mainKit?.web3.utils.toWei("0.001", "ether"));
   }, [mainKit, mainProvider]);
 
