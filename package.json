@@ -5,6 +5,7 @@
   "dependencies": {
     "@celo-tools/use-contractkit": "^3.0.1",
     "@celo/contractkit": "^1.5.2",
+    "@craco/craco": "^6.4.3",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
@@ -12,9 +13,12 @@
     "@types/node": "^16.11.26",
     "@types/react": "^17.0.40",
     "@types/react-dom": "^17.0.13",
+    "@walletconnect/web3-provider": "^1.7.5",
     "axios": "^0.26.1",
     "babel-eslint": "^10.1.0",
+    "buffer": "^6.0.3",
     "camelcase-keys": "^7.0.2",
+    "crypto-browserify": "^3.12.0",
     "eslint": "^8.7.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.5.0",
@@ -42,10 +46,10 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "craco eject",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
     "generate": "yarn plop --plopfile ./generators/plopfile.js"

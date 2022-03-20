@@ -9,6 +9,9 @@ import RegisterStudentPage from "../../pages/RegisterStudentPage";
 import RegisterClassPage from "../../pages/RegisterClassPage";
 import ClassShowPage from "../../pages/ClassShowPage";
 import RegisterClassAttendancePage from "../../pages/RegisterClassAttendancePage";
+import DonorPage from "../../pages/DonorPage";
+import DonorRedeemPage from "../../pages/DonorRedeemPage";
+import DonorLayout from "../../layouts/DonorLayout";
 
 function RoutesComponent(): JSX.Element {
   return (
@@ -80,6 +83,30 @@ function RoutesComponent(): JSX.Element {
               <MainLayout hasBackButton>
                 <RegisterClassAttendancePage />
               </MainLayout>
+            </CurrentUserProvider>
+          </WalletProvider>
+        </Suspense>
+      </Route>
+
+      <Route path="/donor" exact>
+        <Suspense fallback={<div />}>
+          <WalletProvider>
+            <CurrentUserProvider>
+              <DonorLayout>
+                <DonorPage />
+              </DonorLayout>
+            </CurrentUserProvider>
+          </WalletProvider>
+        </Suspense>
+      </Route>
+
+      <Route path="/donor/redeem" exact>
+        <Suspense fallback={<div />}>
+          <WalletProvider>
+            <CurrentUserProvider>
+              <DonorLayout>
+                <DonorRedeemPage />
+              </DonorLayout>
             </CurrentUserProvider>
           </WalletProvider>
         </Suspense>
