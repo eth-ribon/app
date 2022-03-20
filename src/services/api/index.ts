@@ -2,7 +2,7 @@ import Axios, { AxiosRequestConfig } from "axios";
 import camelCaseKeys from "camelcase-keys";
 import snakeCaseKeys from "snakecase-keys";
 
-const API_URL = "http://localhost:3001";
+const API_URL = "https://educadao-api.herokuapp.com/";
 
 export const baseURL = process.env.REACT_APP_RIBON_API || API_URL;
 export const API_SCOPE = "";
