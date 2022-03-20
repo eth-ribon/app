@@ -79,22 +79,6 @@ function DonorRedeemPage(): JSX.Element {
     getContractBalance();
   }, [mainKit]);
 
-  const approveContract = async () => {
-    if (!mainKit) return;
-
-    const amount = mainKit.web3.utils.toWei("100.1", "ether");
-
-    try {
-      const stabletoken = await mainKit.contracts.getStableToken();
-
-      const a = await stabletoken.approve(contractAddress, amount).send();
-
-      console.log(a);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
   const burnTokens = async () => {
     if (!mainKit) return;
 
@@ -159,7 +143,9 @@ function DonorRedeemPage(): JSX.Element {
               value={donationAmount}
               onChange={(e: any) => setDonationAmount(e.target.value)}
             />
-            <S.BalanceText>Saldo de EDC: {contractBalance}</S.BalanceText>
+            <S.BalanceText>
+              Saldo de EDC: {contractBalance.slice(0, 7)}
+            </S.BalanceText>
             <Button
               text="Contribuir"
               onClick={burnTokens}
@@ -167,10 +153,6 @@ function DonorRedeemPage(): JSX.Element {
             />
           </S.InnerContainer>
         </CardBlank>
-
-        <button type="button" onClick={approveContract}>
-          Approve
-        </button>
       </S.BottomContainer>
     </S.Container>
   );

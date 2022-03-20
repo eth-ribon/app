@@ -149,7 +149,7 @@ function DonorPage(): JSX.Element {
       <S.Text>Saldo do fundo</S.Text>
       <CardBlank>
         <S.FundText>
-          {contractBalance} <S.FundTextCoin>cDollar</S.FundTextCoin>
+          {contractBalance.slice(0, 7)} <S.FundTextCoin>cDollar</S.FundTextCoin>
         </S.FundText>
       </CardBlank>
       <S.BottomContainer>
